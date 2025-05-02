@@ -24,7 +24,7 @@ SET row_security = off;
 -- *not* creating schema, since initdb creates it
 
 
-ALTER SCHEMA public OWNER TO djcrmuser;
+ALTER SCHEMA public OWNER TO postgres;
 
 SET default_tablespace = '';
 
@@ -40,7 +40,7 @@ CREATE TABLE public.auth_group (
 );
 
 
-ALTER TABLE public.auth_group OWNER TO djcrmuser;
+ALTER TABLE public.auth_group OWNER TO postgres;
 
 --
 -- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: djcrmuser
@@ -67,7 +67,7 @@ CREATE TABLE public.auth_group_permissions (
 );
 
 
-ALTER TABLE public.auth_group_permissions OWNER TO djcrmuser;
+ALTER TABLE public.auth_group_permissions OWNER TO postgres;
 
 --
 -- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: djcrmuser
@@ -95,7 +95,7 @@ CREATE TABLE public.auth_permission (
 );
 
 
-ALTER TABLE public.auth_permission OWNER TO djcrmuser;
+ALTER TABLE public.auth_permission OWNER TO postgres;
 
 --
 -- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: djcrmuser
@@ -128,7 +128,7 @@ CREATE TABLE public.django_admin_log (
 );
 
 
-ALTER TABLE public.django_admin_log OWNER TO djcrmuser;
+ALTER TABLE public.django_admin_log OWNER TO postgres;
 
 --
 -- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: djcrmuser
@@ -155,7 +155,7 @@ CREATE TABLE public.django_content_type (
 );
 
 
-ALTER TABLE public.django_content_type OWNER TO djcrmuser;
+ALTER TABLE public.django_content_type OWNER TO postgres;
 
 --
 -- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: djcrmuser
@@ -183,7 +183,7 @@ CREATE TABLE public.django_migrations (
 );
 
 
-ALTER TABLE public.django_migrations OWNER TO djcrmuser;
+ALTER TABLE public.django_migrations OWNER TO postgres;
 
 --
 -- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: djcrmuser
@@ -210,7 +210,7 @@ CREATE TABLE public.django_session (
 );
 
 
-ALTER TABLE public.django_session OWNER TO djcrmuser;
+ALTER TABLE public.django_session OWNER TO postgres;
 
 --
 -- Name: leads_agent; Type: TABLE; Schema: public; Owner: djcrmuser
@@ -223,7 +223,7 @@ CREATE TABLE public.leads_agent (
 );
 
 
-ALTER TABLE public.leads_agent OWNER TO djcrmuser;
+ALTER TABLE public.leads_agent OWNER TO postgres;
 
 --
 -- Name: leads_agent_id_seq; Type: SEQUENCE; Schema: public; Owner: djcrmuser
@@ -250,7 +250,7 @@ CREATE TABLE public.leads_category (
 );
 
 
-ALTER TABLE public.leads_category OWNER TO djcrmuser;
+ALTER TABLE public.leads_category OWNER TO postgres;
 
 --
 -- Name: leads_category_id_seq; Type: SEQUENCE; Schema: public; Owner: djcrmuser
@@ -285,7 +285,7 @@ CREATE TABLE public.leads_lead (
 );
 
 
-ALTER TABLE public.leads_lead OWNER TO djcrmuser;
+ALTER TABLE public.leads_lead OWNER TO postgres;
 
 --
 -- Name: leads_lead_id_seq; Type: SEQUENCE; Schema: public; Owner: djcrmuser
@@ -322,7 +322,7 @@ CREATE TABLE public.leads_user (
 );
 
 
-ALTER TABLE public.leads_user OWNER TO djcrmuser;
+ALTER TABLE public.leads_user OWNER TO postgres;
 
 --
 -- Name: leads_user_groups; Type: TABLE; Schema: public; Owner: djcrmuser
@@ -335,7 +335,7 @@ CREATE TABLE public.leads_user_groups (
 );
 
 
-ALTER TABLE public.leads_user_groups OWNER TO djcrmuser;
+ALTER TABLE public.leads_user_groups OWNER TO postgres;
 
 --
 -- Name: leads_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: djcrmuser
@@ -376,7 +376,7 @@ CREATE TABLE public.leads_user_user_permissions (
 );
 
 
-ALTER TABLE public.leads_user_user_permissions OWNER TO djcrmuser;
+ALTER TABLE public.leads_user_user_permissions OWNER TO postgres;
 
 --
 -- Name: leads_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: djcrmuser
@@ -402,7 +402,7 @@ CREATE TABLE public.leads_userprofile (
 );
 
 
-ALTER TABLE public.leads_userprofile OWNER TO djcrmuser;
+ALTER TABLE public.leads_userprofile OWNER TO postgres;
 
 --
 -- Name: leads_userprofile_id_seq; Type: SEQUENCE; Schema: public; Owner: djcrmuser
