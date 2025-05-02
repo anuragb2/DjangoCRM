@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load tailwind_filters %}
+
+{% block content %}
+
+<section class="text-gray-700 body-font overflow-hidden bg-white">
+  <div class="container px-6 py-16 mx-auto">
+    <div class="max-w-lg mx-auto bg-gray-50 rounded-lg shadow-md p-8">
+
+      <!-- Back Link -->
+      <div class="pb-4 border-b border-gray-200">
+        <a href="{% url 'agents:agent-list' %}" class="text-sm text-gray-600 hover:text-blue-500 font-medium">
+          ← Go back to agents
+        </a>
+      </div>
+
+      <!-- Title -->
+      <h1 class="text-3xl font-bold text-gray-900 mt-6 mb-6">
+        Create a New Agent
+      </h1>
+
+      <!-- Form -->
+      <form method="POST" class="space-y-4">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="w-full text-white bg-green-600 hover:bg-green-700 px-4 py-2 rounded-md font-medium shadow-sm transition">
+          Submit
+        </button>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

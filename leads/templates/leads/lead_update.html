@@ -1,0 +1,56 @@
+
+
+{% extends "base.html" %}
+{% load tailwind_filters %}
+
+{% block content %}
+
+<section class="text-gray-700 body-font bg-white">
+  <div class="container px-6 py-16 mx-auto">
+    <div class="lg:w-4/5 mx-auto flex flex-wrap bg-gray-50 rounded-lg shadow-md p-8">
+
+      <!-- Left Side: Form and Info -->
+      <div class="lg:w-1/2 w-full lg:pr-12 mb-8 lg:mb-0">
+        <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-wide">Lead</h2>
+        <h1 class="text-3xl font-bold text-gray-900 mt-2 mb-6">
+          {{ lead.first_name }} {{ lead.last_name }}
+        </h1>
+
+        <!-- Tabs -->
+        <div class="flex space-x-6 border-b border-gray-200 pb-4 mb-6">
+          <a href="{% url 'leads:lead-detail' lead.pk %}" class="text-gray-600 hover:text-green-600 font-medium">
+            Overview
+          </a>
+          <a href="{% url 'leads:lead-category-update' lead.pk %}" class="text-gray-600 hover:text-green-600 font-medium">
+            Category
+          </a>
+          <a href="{% url 'leads:lead-update' lead.pk %}" class="text-green-600 font-medium border-b-2 border-green-600 pb-1">
+            Update Details
+          </a>
+        </div>
+
+        <!-- Form -->
+        <form method="post">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <button type="submit" class="w-full mt-4 text-white bg-green-500 hover:bg-green-600 px-4 py-2 rounded-md transition">
+            Submit
+          </button>
+        </form>
+
+        <!-- Delete Button -->
+        <div class="mt-6 pt-4 border-t border-gray-200">
+          <a href="{% url 'leads:lead-delete' lead.pk %}" class="inline-block text-center w-full text-white bg-red-500 hover:bg-red-600 py-2 px-6 rounded-md transition">
+            Delete Lead
+          </a>
+        </div>
+      </div>
+
+      <!-- Optional right-side image or placeholder (currently commented) -->
+      {% comment %} <img alt="Lead image" class="lg:w-1/2 w-full h-64 object-cover object-center rounded" src="https://dummyimage.com/400x400" /> {% endcomment %}
+
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

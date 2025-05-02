@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load tailwind_filters %}
+
+{% block content %}
+
+<section class="text-gray-700 body-font overflow-hidden bg-white">
+  <div class="container px-6 py-16 mx-auto">
+    <div class="max-w-lg mx-auto bg-gray-50 rounded-lg shadow-md p-8">
+
+      <!-- Back Link -->
+      <div class="pb-4 border-b border-gray-200">
+        <a href="{% url 'agents:agent-list' %}" class="text-sm text-gray-600 hover:text-blue-500 font-medium">
+          ← Go back to agents
+        </a>
+      </div>
+
+      <!-- Title -->
+      <h1 class="text-2xl font-semibold text-gray-900 mt-6 mb-4">
+        Are you sure you want to delete this agent?
+      </h1>
+
+      <!-- Form -->
+      <form method="post" class="space-y-4">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="w-full text-white bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md shadow-sm font-medium transition">
+          Delete
+        </button>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

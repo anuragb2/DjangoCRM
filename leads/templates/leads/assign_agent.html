@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="text-gray-600 body-font bg-white">
+  <div class="container px-6 py-24 mx-auto">
+
+    <!-- Navigation Back Link -->
+    <a href="{% url 'leads:lead-list' %}" class="text-green-500 hover:text-green-600 mb-6 inline-block">
+      Go back to leads
+    </a>
+    <hr class="my-4" />
+
+    <!-- Heading Section -->
+    <h1 class="text-3xl font-semibold text-gray-900 mb-6">
+      Assign an agent to this lead
+    </h1>
+
+    <!-- Form Section -->
+    <div class="bg-gray-50 shadow-lg rounded-lg p-8">
+      <form method="post" class="space-y-6">
+        {% csrf_token %}
+        
+        <!-- Form Fields -->
+        {{ form.as_p }}
+        
+        <!-- Submit Button -->
+        <button type="submit" class="w-full sm:w-auto text-white bg-green-500 hover:bg-green-600 px-4 py-1.5 rounded-md transition">
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

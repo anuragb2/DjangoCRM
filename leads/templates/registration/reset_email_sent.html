@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="text-gray-700 body-font overflow-hidden bg-white">
+  <div class="container px-6 py-16 mx-auto">
+    <div class="max-w-lg mx-auto bg-gray-50 rounded-lg shadow-md p-8 text-center">
+
+      <!-- Success Message -->
+      <h3 class="text-3xl font-bold text-green-600 mb-4">
+        ✅ Reset Link Sent!
+      </h3>
+      <p class="text-gray-600 mb-4">If an account with that email exists, we’ve sent a password reset link.</p>
+      <p class="text-gray-600 mb-6">For development, you can find the reset link printed in the console.</p>
+
+      <!-- Go Back to Login Button -->
+      <a href="{% url 'login' %}" class="inline-block text-center w-full text-blue-600 hover:text-blue-700 border-2 border-blue-600 hover:border-blue-700 px-4 py-2 rounded-md font-medium transition">
+        Back to Login
+      </a>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}
