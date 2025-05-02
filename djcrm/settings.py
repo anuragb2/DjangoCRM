@@ -2,6 +2,9 @@ from pathlib import Path
 import environ
 import dj_database_url
 import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 
@@ -10,8 +13,7 @@ env = environ.Env(
 )
 
 
-environ.Env.read_env()
-
+environ.Env.read_env(BASE_DIR / "djcrm" / ".env")
 
     
 # environ.Env.read_env()
@@ -27,14 +29,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['djcrm.onrender.com', '127.0.0.1', 'localhost']
+
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    
+   
     'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -98,6 +101,10 @@ DATABASES = {
 
     }
 }
+if os.getenv('RENDER'):
+    
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600, conn_health_checks=True)
+    # ALLOWED_HOSTS += ['djcrm.onrender.com']
 
 
 # Password validation
@@ -141,7 +148,8 @@ STATICFILES_DIRS =[
     BASE_DIR  / "static"
 ]
 
-STATIC_ROOT = "static_root"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 AUTH_USER_MODEL = "leads.User"
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -159,7 +167,5 @@ CRISPY_TEMPLATE_PACK = "tailwind"
 
 
 
-if os.getenv('RENDER'):
-    import dj_database_url
-    DATABASES['default'] = dj_database_url.config(conn_max_age=600, conn_health_checks=True)
-    ALLOWED_HOSTS += ['your-service-name.onrender.com']
+
+
