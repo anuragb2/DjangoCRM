@@ -149,23 +149,40 @@ STATICFILES_DIRS =[
 ]
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
-
-AUTH_USER_MODEL = "leads.User"
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
+AUTH_USER_MODEL = "leads.User"
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-
 LOGIN_REDIRECT_URL = '/leads'
 LOGOUT_REDIRECT_URL = '/'
-
 LOGIN_URL = "login"
+
+
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 CRISPY_TEMPLATE_PACK = "tailwind"
 
 
 
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    X_FRAME_OPTIONS = "DENY"
 
+    ALLOWED_HOSTS = ["*"]
 
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.mailgun.org'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = 'postmaster@sandboxe70c7490108e40a1a0af953a94eca4f8.mailgun.org'
+    EMAIL_HOST_PASSWORD = '68de08d09f5be153f0fe2a27ae6a0171-a908eefc-6fe812d7'
 

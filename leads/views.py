@@ -11,6 +11,10 @@ from django.utils.encoding import force_bytes,force_str
 import hashlib
 from .forms import ForgotPasswordForm,ResetPasswordForm , AssignAgentForm, LeadCategoryUpdateForm
 from django.contrib.auth import get_user_model
+from django.template.loader import render_to_string
+from django.conf import settings
+# from django.core.mail import EmailMessage
+
 
 
 User=get_user_model()
@@ -101,9 +105,9 @@ class LeadListView(LoginRequiredMixin, ListView):
 
 
 class LeadDetailView(LoginRequiredMixin, DetailView):
-    template_name = "leads/lead_detail.html"
-    
+    template_name = "leads/lead_detail.html" 
     context_object_name = "lead"
+    
    # queryset = Lead.objects.all()
     def get_queryset(self):
         user=self.request.user
@@ -474,11 +478,19 @@ def forgot_password_view(request):
 
                 reset_url = request.build_absolute_uri(reverse('reset-password',kwargs={'uid':uid, 'token':token}))
 
+
+                html_content = render_to_string('email_templates/password_reset_email.html', {
+                    'user': user,
+                    'reset_link': reset_url,
+                })
+
+
                 send_mail(
                     subject="Reset your password",
                     message=f"Click the link to reset your password: {reset_url}",
-                    from_email="anurag200266@gmail.com",
+                    from_email = settings.EMAIL_HOST_USER,
                     recipient_list=[user.email],
+                    html_message=html_content
                 )
 
                 return render(request, 'registration/reset_email_sent.html')
