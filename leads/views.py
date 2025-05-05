@@ -5,7 +5,7 @@ from .forms import LeadForm , LeadModelForms, CustomCreation
 from django.views.generic import TemplateView, ListView, DetailView,CreateView,UpdateView,DeleteView, FormView
 from django.core.mail import send_mail
 from django.contrib.auth.mixins import LoginRequiredMixin
-from agents.mixins import OrganisorandAgentListView
+from agents.mixins import OrganisorAndLoginRequiredMixin
 from django.utils.http import urlsafe_base64_decode,urlsafe_base64_encode
 from django.utils.encoding import force_bytes,force_str
 import hashlib
@@ -141,7 +141,7 @@ class LeadDetailView(LoginRequiredMixin, DetailView):
 
 
 
-class LeadCreateView(OrganisorandAgentListView, CreateView):
+class LeadCreateView(OrganisorAndLoginRequiredMixin, CreateView):
     template_name = "leads/lead_create.html"
     form_class = LeadModelForms
     
@@ -218,7 +218,7 @@ class LeadCreateView(OrganisorandAgentListView, CreateView):
 
 
 
-class LeadUpdateView(OrganisorandAgentListView, UpdateView):
+class LeadUpdateView(OrganisorAndLoginRequiredMixin, UpdateView):
     template_name= "leads/lead_update.html"
     # queryset = Lead.objects.all()
     form_class = LeadModelForms
@@ -282,7 +282,7 @@ class LeadUpdateView(OrganisorandAgentListView, UpdateView):
 
 
 
-class LeadDeleteView(OrganisorandAgentListView, DeleteView):
+class LeadDeleteView(OrganisorAndLoginRequiredMixin, DeleteView):
     template_name= "leads/lead_delete.html"
     # queryset = Lead.objects.all()
 
@@ -311,7 +311,7 @@ def lead_delete(request,pk):
 
 
 
-class AssignAgentView(OrganisorandAgentListView, FormView):
+class AssignAgentView(OrganisorAndLoginRequiredMixin, FormView):
     template_name = "leads/assign_agent.html"
     form_class= AssignAgentForm
 
