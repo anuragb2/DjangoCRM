@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 
-ALLOWED_HOSTS = ['djangocrm-c4to.onrender.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['djangocrm-c4to.onrender.com', '127.0.0.1', 'localhost','djangocrm-1-qwhf.onrender.com']
 
 
 
