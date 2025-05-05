@@ -183,6 +183,6 @@ if not DEBUG:
     EMAIL_HOST = 'smtp.mailgun.org'
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
-    EMAIL_HOST_USER = 'postmaster@sandboxe70c7490108e40a1a0af953a94eca4f8.mailgun.org'
-    EMAIL_HOST_PASSWORD = '68de08d09f5be153f0fe2a27ae6a0171-a908eefc-6fe812d7'
+    EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
