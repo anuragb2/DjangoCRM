@@ -221,6 +221,7 @@ class LeadCreateView(OrganisorandAgentListView, CreateView):
 class LeadUpdateView(OrganisorandAgentListView, UpdateView):
     template_name= "leads/lead_update.html"
     # queryset = Lead.objects.all()
+    form_class = LeadModelForms
 
     def get_queryset(self):
         user=self.request.user
@@ -228,26 +229,25 @@ class LeadUpdateView(OrganisorandAgentListView, UpdateView):
         return Lead.objects.filter(organization = user.userprofile)  
 
 
-    form_class = LeadModelForms
     def get_success_url(self):
         return reverse("leads:lead-list")
 
 
 
-# def lead_update(request,pk):
-#     lead=Lead.objects.get(id=pk)
-#     form = LeadModelForms(instance=lead)
-#     if request.method == "POST":
-#         form = LeadModelForms(request.POST,instance=lead)
-#         if form.is_valid():
-#             form.save()
-#             return redirect("/leads")
+def lead_update(request,pk):
+    lead=Lead.objects.get(id=pk)
+    form = LeadModelForms(instance=lead)
+    if request.method == "POST":
+        form = LeadModelForms(request.POST,instance=lead)
+        if form.is_valid():
+            form.save()
+            return redirect("/leads")
 
-#     context = {
-#         "form":form,
-#         "lead":lead
-#     }
-#     return render(request,'leads/lead_update.html',context)
+    context = {
+        "form":form,
+        "lead":lead
+    }
+    return render(request,'leads/lead_update.html',context)
 
 
 
