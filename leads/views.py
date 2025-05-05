@@ -144,19 +144,20 @@ class LeadDetailView(LoginRequiredMixin, DetailView):
 class LeadCreateView(OrganisorandAgentListView, CreateView):
     template_name = "leads/lead_create.html"
     form_class = LeadModelForms
-
+    
     def get_success_url(self):
         return reverse ("leads:lead-list")
     
     def form_valid(self,form):
+        user=self.request.user
         lead = form.save(commit=False)
         lead.organization = self.request.user.userprofile
         lead.save()
         send_mail(
             subject="A mail has been created",
             message="Go to the site to see the new lead",
-            from_email="test1@test.com",
-            recipient_list=["test2@test.com"],
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[user.email],
         )
         return super(LeadCreateView,self).form_valid(form)
     
