@@ -231,27 +231,31 @@ class LeadUpdateView(OrganisorAndLoginRequiredMixins, UpdateView):
 
     def get_success_url(self):
         return reverse("leads:lead-list")
+    
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+        # Filter agent field to only show agents in the same organization
+        form.fields['agent'].queryset = Agent.objects.filter(organisation=self.request.user.userprofile)
+        return form
 
     def form_valid(self, form):
-        form.save()
-        return super(LeadUpdateView, self).form_valid(form)
+        return super().form_valid(form)
 
 
+# def lead_update(request,pk):
+#     lead=Lead.objects.get(id=pk)
+#     form = LeadModelForms(instance=lead)
+#     if request.method == "POST":
+#         form = LeadModelForms(request.POST,instance=lead)
+#         if form.is_valid():
+#             form.save()
+#             return redirect("/leads")
 
-def lead_update(request,pk):
-    lead=Lead.objects.get(id=pk)
-    form = LeadModelForms(instance=lead)
-    if request.method == "POST":
-        form = LeadModelForms(request.POST,instance=lead)
-        if form.is_valid():
-            form.save()
-            return redirect("/leads")
-
-    context = {
-        "form":form,
-        "lead":lead
-    }
-    return render(request,'leads/lead_update.html',context)
+#     context = {
+#         "form":form,
+#         "lead":lead
+#     }
+#     return render(request,'leads/lead_update.html',context)
 
 
 
