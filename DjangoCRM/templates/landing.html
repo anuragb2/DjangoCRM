@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="body-font py-6 bg-gradient-to-br from-white via-gray-50 to-gray-100 w-screen">
+  <div class="flex flex-col items-center justify-center w-full px-0">
+
+    <img 
+      class="w-full mb-6 object-cover object-center rounded-none shadow-md transform transition duration-500 hover:scale-105 hover:brightness-105" 
+      src="https://i.pinimg.com/736x/6d/96/e0/6d96e025638d360336653f1273b252b8.jpg " 
+      alt="CRM Dashboard Preview"
+    >
+
+    <h1 class="sm:text-4xl text-3xl font-bold text-gray-800 mb-4 text-center tracking-tight px-6">
+      Supercharged CRM Built with Django
+    </h1>
+
+    <p class="text-lg text-gray-500 mb-6 max-w-4xl text-center leading-relaxed px-4">
+      CRM that manages your leads
+    </p>
+    <a href="{% url 'login'%}">
+      <button class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2.5 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out">
+        Get Started
+      </button>
+    </a>
+  </div>
+</section>
+{% endblock content %}
