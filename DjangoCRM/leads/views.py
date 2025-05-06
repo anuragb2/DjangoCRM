@@ -216,6 +216,7 @@ class LeadCreateView(OrganisorAndLoginRequiredMixin, CreateView):
 class LeadUpdateView(OrganisorAndLoginRequiredMixin, UpdateView):
     template_name= "leads/lead_update.html"
     # queryset = Lead.objects.all()
+    form_class = LeadModelForms
 
     def get_queryset(self):
         user=self.request.user
@@ -223,26 +224,29 @@ class LeadUpdateView(OrganisorAndLoginRequiredMixin, UpdateView):
         return Lead.objects.filter(organization = user.userprofile)  
 
 
-    form_class = LeadModelForms
     def get_success_url(self):
         return reverse("leads:lead-list")
 
+    def form_valid(self, form):
+        form.save()
+        return super(LeadUpdateView, self).form_valid(form)
 
 
-# def lead_update(request,pk):
-#     lead=Lead.objects.get(id=pk)
-#     form = LeadModelForms(instance=lead)
-#     if request.method == "POST":
-#         form = LeadModelForms(request.POST,instance=lead)
-#         if form.is_valid():
-#             form.save()
-#             return redirect("/leads")
 
-#     context = {
-#         "form":form,
-#         "lead":lead
-#     }
-#     return render(request,'leads/lead_update.html',context)
+def lead_update(request,pk):
+    lead=Lead.objects.get(id=pk)
+    form = LeadModelForms(instance=lead)
+    if request.method == "POST":
+        form = LeadModelForms(request.POST,instance=lead)
+        if form.is_valid():
+            form.save()
+            return redirect("/leads")
+
+    context = {
+        "form":form,
+        "lead":lead
+    }
+    return render(request,'leads/lead_update.html',context)
 
 
 
