@@ -235,7 +235,7 @@ class LeadUpdateView(OrganisorAndLoginRequiredMixins, UpdateView):
     def get_form(self, *args, **kwargs):
         form = super().get_form(*args, **kwargs)
         # Filter agent field to only show agents in the same organization
-        form.fields['agent'].queryset = Agent.objects.filter(organisation=self.request.user.userprofile)
+        form.fields['agent'].queryset = Agent.objects.filter(organization=self.request.user.userprofile)
         return form
 
     def form_valid(self, form):
