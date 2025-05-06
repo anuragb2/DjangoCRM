@@ -4,13 +4,13 @@ from leads.models import Agent
 from django.shortcuts import reverse, redirect
 from .forms import AgentModelForm
 from leads.models import UserProfile
-from .mixins import OrganisorandAgentListView
+from .mixins import OrganisorAndLoginRequiredMixins
 from django.core.mail import send_mail
 import random
 
 
 
-class AgentListView(OrganisorandAgentListView, generic.ListView):
+class AgentListView(OrganisorAndLoginRequiredMixins, generic.ListView):
     template_name = "agents/agent_list.html"
 
     def get_queryset(self):
@@ -18,7 +18,7 @@ class AgentListView(OrganisorandAgentListView, generic.ListView):
         return Agent.objects.filter(organization=organization)
     
 
-class AgentCreateView(OrganisorandAgentListView, generic.CreateView):
+class AgentCreateView(OrganisorAndLoginRequiredMixins, generic.CreateView):
     template_name = "agents/agent_create.html"
     form_class = AgentModelForm
 
@@ -48,7 +48,7 @@ class AgentCreateView(OrganisorandAgentListView, generic.CreateView):
         return super(AgentCreateView,self).form_valid(form)
     
 
-class AgentDetailView(OrganisorandAgentListView, generic.DetailView):
+class AgentDetailView(OrganisorAndLoginRequiredMixins, generic.DetailView):
     template_name = "agents/agent_detail.html"
     context_object_name = 'agent'
     def get_queryset(self):
@@ -56,7 +56,7 @@ class AgentDetailView(OrganisorandAgentListView, generic.DetailView):
         return Agent.objects.filter(organization=organization)
     
 
-class AgentUpdateView(OrganisorandAgentListView, generic.UpdateView):
+class AgentUpdateView(OrganisorAndLoginRequiredMixins, generic.UpdateView):
     template_name = "agents/agent_update.html"
     def get_queryset(self):
         organization = self.request.user.userprofile
@@ -67,7 +67,7 @@ class AgentUpdateView(OrganisorandAgentListView, generic.UpdateView):
     
 
 
-class AgentDeleteView(OrganisorandAgentListView, generic.DeleteView):
+class AgentDeleteView(OrganisorAndLoginRequiredMixins, generic.DeleteView):
     template_name="agents/agent_delete.html"
 
     def get_queryset(self):
