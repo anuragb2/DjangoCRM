@@ -162,6 +162,16 @@ class LeadCreateView(OrganisorAndLoginRequiredMixins, CreateView):
         return super(LeadCreateView,self).form_valid(form)
     
 
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+        # Filter agent field to only show agents in the same organization
+        form.fields['agent'].queryset = Agent.objects.filter(organization=self.request.user.userprofile)
+        return form
+
+
+
+    
+
     
 
 # def lead_create(request):
